@@ -6,7 +6,9 @@ SRC = src/main.c \
 	  src/utils.c \
 	  src/file_utils.c \
 	  src/close.c \
-	  src/init.c
+	  src/init.c \
+	  src/cmd.c \
+	  src/pipex.c 
 OBJ = $(SRC:src/%c=$(BIN)/%o)
 INCS = ./includes
 LIBFT_PATH = libft

@@ -12,7 +12,7 @@ static void	default_data(t_data *data)
 	data->child = 0;
 	data->here_doc = 0;
 	data->cmd_count = 0;
-	data->cmds = NULL;
+	data->cmd = NULL;
 	data->cmd_args = NULL;
 }
 

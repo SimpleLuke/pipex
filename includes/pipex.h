@@ -20,12 +20,18 @@ typedef struct s_data
 	int		here_doc;
 	int		cmd_count;
 	char	**cmd_args;
-	char	*cmds;
+	char	*cmd;
 }	t_data;
 
 // init.c
 void	init_data(int argc, char **argv, char **env, t_data *data);
 
+// pipex.c
+int		pipex(t_data *data);
+
+// cmd.c
+// char	*get_cmd(t_data *data, int child_no);
+char	*get_cmd(char *cmd, t_data *data);
 // utils.c
 int		print_err(char *msg1, char *msg2, int errstate);
 void	err_exit(int errstate, t_data *data);
