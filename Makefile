@@ -3,7 +3,10 @@ NAME = pipex
 CC = cc
 CFLAG = -Wall -Werror -Wextra -g3
 SRC = src/main.c \
-	  src/utils.c
+	  src/utils.c \
+	  src/file_utils.c \
+	  src/close.c \
+	  src/init.c
 OBJ = $(SRC:src/%c=$(BIN)/%o)
 INCS = ./includes
 LIBFT_PATH = libft

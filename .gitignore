@@ -1,3 +1,5 @@
 *.o
 *.swp
 pipex
+infile
+outfile

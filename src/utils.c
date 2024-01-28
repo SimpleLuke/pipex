@@ -14,6 +14,7 @@ int	print_err(char *msg1, char *msg2, int errstate)
 
 void	err_exit(int errstate, t_data *data)
 {
-	(void)data;
+	if (data)
+		close_fds(data);
 	exit(errstate);
 }
