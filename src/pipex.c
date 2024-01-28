@@ -10,7 +10,7 @@ void	run_child(t_data *data)
 		redirect_stream(data->pipes[data->child * 2 - 2], data->fd_out, data);
 	else
 		redirect_stream(data->pipes[data->child * 2 - 2], data->pipes[data->child * 2 + 1], data);
-	fprintf(stderr, "CHILD: %s\n", data->cmd);
+	// fprintf(stderr, "CHILD: %s\n", data->cmd);
 	close_fds(data);
 	if (data->cmd_args == NULL || data->cmd == NULL)
 		err_exit(1, data);
@@ -38,9 +38,13 @@ int	run_parent(t_data *data)
 	while (data->child >= 0)
 	{
 		wpid = waitpid(data->pids[data->child], &status, 0);
-		(void)wpid;
+		if (wpid == data->pids[data->cmd_count - 1])
+			if ((data->child == (data->cmd_count - 1)) && WIFEXITED(status))
+				exit_code = WEXITSTATUS(status);
 		data->child--;
 	}
+	ft_free((void **)&data->pipes);
+	ft_free((void **)&data->pids);
 	return (exit_code);
 }
 
@@ -54,7 +58,7 @@ int	pipex(t_data *data)
 		data->cmd_args = ft_split(data->argv[data->child + 2 + data->here_doc], ' ');
 		data->cmd = get_cmd(data->cmd_args[0], data);
 		if (!data->cmd)
-			print_err("command not found", data->cmd_args[0], 1);
+			print_err(data->cmd_args[0], "command not found", 1);
 		// printf("%s\n", data->cmd);
 		data->pids[data->child] = fork();
 		if (data->pids[data->child] == -1)

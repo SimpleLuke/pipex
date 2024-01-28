@@ -49,7 +49,7 @@ char	*get_cmd(char *cmd, t_data *data)
 	i = 0;
 	cmd_path = NULL;
 	if (access(cmd, F_OK | X_OK) == 0)
-		return (cmd);
+		return (ft_strdup(cmd));
 	env_list = get_env_list(data);
 	while (env_list[i])
 	{
