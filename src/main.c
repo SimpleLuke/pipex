@@ -19,6 +19,7 @@ int	main(int argc, char **argv, char **env)
 	if (!env)
 		err_exit(print_err("Invalid environment variables", NULL, 1), NULL);
 	init_data(argc, argv, env, &data);
+	close_fds(&data);
 	printf("Enter to continue...\n");
 	getchar();
 	// err_exit(1, &data);
