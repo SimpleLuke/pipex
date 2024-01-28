@@ -35,7 +35,7 @@ void	init_data(int argc, char **argv, char **env, t_data *data)
 	data->argc = argc;
 	data->argv = argv;
 	data->env = env;
-	if (!ft_strncmp("here_doc", argv[0], 9))
+	if (!ft_strncmp("here_doc", argv[1], 9))
 		data->here_doc = 1;
 	data->cmd_count = data->argc - 3 - data->here_doc;
 	setup_file_input(data);

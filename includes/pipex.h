@@ -6,6 +6,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <sys/errno.h>
+# include <stdbool.h>
 
 typedef struct s_data
 {

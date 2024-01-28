@@ -1,4 +1,5 @@
 #include "../includes/pipex.h"
+#include <unistd.h>
 
 void	redirect_stream(int input, int output, t_data *data);
 
@@ -70,5 +71,7 @@ int	pipex(t_data *data)
 		data->child++;
 	}
 	exit_code = run_parent(data);
+	if (data->here_doc)
+		unlink(".temp_heredoc");
 	return (exit_code);
 }

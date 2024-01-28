@@ -23,6 +23,5 @@ int	main(int argc, char **argv, char **env)
 	exit_code = pipex(&data);
 	// printf("Enter to continue...\n");
 	// getchar();
-	// err_exit(1, &data);
 	return (exit_code);
 }
