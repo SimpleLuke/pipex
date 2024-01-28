@@ -55,9 +55,10 @@ char	*get_cmd(char *cmd, t_data *data)
 	{
 		cmd_path = ft_strjoin(env_list[i], cmd);
 		if (access(cmd_path, F_OK | X_OK) == 0)
-			return (cmd_path);
+			break ;
 		ft_free((void **)&cmd_path);
 		i++;
 	}
-	return (NULL);
+	ft_free_strarr(env_list);
+	return (cmd_path);
 }

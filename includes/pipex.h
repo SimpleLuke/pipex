@@ -42,4 +42,5 @@ void	setup_file_output(t_data *data);
 
 // close.c
 void	close_fds(t_data *data);
+void	ft_free_strarr(char **arr);
 #endif // !PIPEX_H
