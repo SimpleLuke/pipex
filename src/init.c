@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/29 11:21:20 by llai              #+#    #+#             */
+/*   Updated: 2024/01/29 11:21:44 by llai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pipex.h"
 
 static void	default_data(t_data *data)
@@ -47,5 +59,4 @@ void	init_data(int argc, char **argv, char **env, t_data *data)
 	if (!data->pids)
 		err_exit(print_err("Malloc error", "data->pids", 1), data);
 	init_pipes(data);
-	// printf("IN:%d, OUT:%d\n", data->fd_in, data->fd_out);
 }

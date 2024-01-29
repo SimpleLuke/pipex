@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/29 11:20:37 by llai              #+#    #+#             */
+/*   Updated: 2024/01/29 11:21:04 by llai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pipex.h"
 #include <sys/unistd.h>
 #include <unistd.h>
@@ -28,10 +40,10 @@ char	**get_env_list(t_data *data)
 	path = NULL;
 	while (data->env[i])
 	{
-		if(!ft_strncmp("PATH=", data->env[i], 5))
+		if (!ft_strncmp("PATH=", data->env[i], 5))
 		{
 			path = data->env[i] + 5;
-			break;
+			break ;
 		}
 		i++;
 	}

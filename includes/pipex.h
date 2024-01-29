@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/29 11:13:20 by llai              #+#    #+#             */
+/*   Updated: 2024/01/29 11:18:42 by llai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_H
 # define PIPEX_H
 
@@ -7,6 +19,8 @@
 # include <string.h>
 # include <sys/errno.h>
 # include <stdbool.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct s_data
 {

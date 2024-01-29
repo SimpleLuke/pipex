@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/29 11:15:01 by llai              #+#    #+#             */
+/*   Updated: 2024/01/29 11:20:24 by llai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pipex.h"
 #include <unistd.h>
 
@@ -12,7 +24,6 @@ void	create_heredoc(t_data *data)
 	if (fd == -1)
 		print_err("here_doc", strerror(errno), 1);
 	stdin_dup = dup(STDIN_FILENO);
-	line = "";
 	is_open = 1;
 	while (true)
 	{
@@ -51,9 +62,11 @@ void	setup_file_input(t_data *data)
 void	setup_file_output(t_data *data)
 {
 	if (!data->here_doc)
-		data->fd_out = open(data->argv[data->argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		data->fd_out = open(data->argv[data->argc - 1],
+				O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else
-		data->fd_out = open(data->argv[data->argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+		data->fd_out = open(data->argv[data->argc - 1],
+				O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (data->fd_out == -1)
 		print_err(data->argv[data->argc - 1], strerror(errno), 1);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/29 11:21:59 by llai              #+#    #+#             */
+/*   Updated: 2024/01/29 11:22:58 by llai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pipex.h"
 #include <unistd.h>
 
@@ -10,8 +22,8 @@ void	run_child(t_data *data)
 	else if (data->child == data->cmd_count - 1)
 		redirect_stream(data->pipes[data->child * 2 - 2], data->fd_out, data);
 	else
-		redirect_stream(data->pipes[data->child * 2 - 2], data->pipes[data->child * 2 + 1], data);
-	// fprintf(stderr, "CHILD: %s\n", data->cmd);
+		redirect_stream(data->pipes[data->child * 2 - 2],
+			data->pipes[data->child * 2 + 1], data);
 	close_fds(data);
 	if (data->cmd_args == NULL || data->cmd == NULL)
 		err_exit(1, data);
@@ -55,12 +67,11 @@ int	pipex(t_data *data)
 
 	while (data->child < data->cmd_count)
 	{
-		// data->cmd = get_cmd(data, data->child);
-		data->cmd_args = ft_split(data->argv[data->child + 2 + data->here_doc], ' ');
+		data->cmd_args = ft_split(data->argv[data->child
+				+ 2 + data->here_doc], ' ');
 		data->cmd = get_cmd(data->cmd_args[0], data);
 		if (!data->cmd)
 			print_err(data->cmd_args[0], "command not found", 1);
-		// printf("%s\n", data->cmd);
 		data->pids[data->child] = fork();
 		if (data->pids[data->child] == -1)
 			err_exit(print_err("Fork error", NULL, 1), data);
