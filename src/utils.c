@@ -6,7 +6,7 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:23:28 by llai              #+#    #+#             */
-/*   Updated: 2024/01/29 11:23:29 by llai             ###   ########.fr       */
+/*   Updated: 2024/01/29 11:53:05 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ void	err_exit(int errstate, t_data *data)
 			ft_free((void **)&data->pipes);
 		if (data->pids)
 			ft_free((void **)&data->pids);
+		if (data->cmd)
+			ft_free((void **)&data->cmd);
+		if (data->cmd_args)
+			ft_free_strarr(data->cmd_args);
 	}
 	exit(errstate);
 }

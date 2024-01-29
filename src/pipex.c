@@ -6,7 +6,7 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:21:59 by llai              #+#    #+#             */
-/*   Updated: 2024/01/29 11:22:58 by llai             ###   ########.fr       */
+/*   Updated: 2024/01/29 11:50:39 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	pipex(t_data *data)
 				+ 2 + data->here_doc], ' ');
 		data->cmd = get_cmd(data->cmd_args[0], data);
 		if (!data->cmd)
-			print_err(data->cmd_args[0], "command not found", 1);
+			print_err("command not found", data->cmd_args[0], 1);
 		data->pids[data->child] = fork();
 		if (data->pids[data->child] == -1)
 			err_exit(print_err("Fork error", NULL, 1), data);

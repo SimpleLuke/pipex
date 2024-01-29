@@ -6,7 +6,7 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:24:24 by llai              #+#    #+#             */
-/*   Updated: 2024/01/29 11:25:35 by llai             ###   ########.fr       */
+/*   Updated: 2024/01/29 11:35:22 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,5 @@ int	main(int argc, char **argv, char **env)
 		err_exit(print_err("Invalid environment variables", NULL, 1), NULL);
 	init_data(argc, argv, env, &data);
 	exit_code = pipex(&data);
-	// printf("Enter to continue...\n");
-	// getchar();
 	return (exit_code);
 }
