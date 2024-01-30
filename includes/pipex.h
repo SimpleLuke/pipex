@@ -6,7 +6,7 @@
 /*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:47:30 by llai              #+#    #+#             */
-/*   Updated: 2024/01/30 15:34:52 by llai             ###   ########.fr       */
+/*   Updated: 2024/01/30 15:38:50 by llai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <string.h>
 # include <sys/errno.h>
 # include <stdbool.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 # define FILE_PERMISSION 0666
 
