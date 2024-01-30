@@ -6,7 +6,7 @@
 #    By: llai <llai@student.42london.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 09:38:33 by llai              #+#    #+#              #
-#    Updated: 2024/01/24 18:58:34 by llai             ###   ########.fr        #
+#    Updated: 2024/01/30 14:29:56 by llai             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,8 @@ SRC = ft_isalpha.c \
 	  ft_lstmap.c \
 	  ft_lstget.c \
 	  ft_lstiter_param.c \
-	  ft_free.c
+	  ft_free.c \
+	  ft_free_strarr.c
 OBJS = $(SRC:.c=.o)
 
 %.o: %.c 

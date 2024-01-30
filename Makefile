@@ -3,7 +3,7 @@ NAME = pipex
 CC = cc
 CFLAG = -Wall -Werror -Wextra -g3
 SRC = src/main.c \
-	  src/utils.c \
+	  src/error.c \
 	  src/file_utils.c \
 	  src/close.c \
 	  src/init.c \

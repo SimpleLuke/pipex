@@ -1,18 +1,61 @@
-#include "../includes/pipex.h"
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/30 13:46:54 by llai              #+#    #+#             */
+/*   Updated: 2024/01/30 15:35:12 by llai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	create_heredoc(t_data *data)
+#include "../includes/pipex.h"
+
+void		set_infile_fd(t_data *data);
+void		set_outfile_fd(t_data *data);
+static void	create_heredoc(t_data *data);
+
+void	set_infile_fd(t_data *data)
+{
+	if (!data->here_doc)
+	{
+		data->infile_fd = open(data->argv[1], O_RDONLY, FILE_PERMISSION);
+		if (data->infile_fd == -1)
+			print_err(data->argv[1], strerror(errno), EXIT_FAILURE);
+	}
+	else
+	{
+		create_heredoc(data);
+		data->infile_fd = open(".temp_heredoc", O_RDONLY, FILE_PERMISSION);
+		if (data->infile_fd == -1)
+			print_err("here_doc", strerror(errno), EXIT_FAILURE);
+	}
+}
+
+void	set_outfile_fd(t_data *data)
+{
+	if (!data->here_doc)
+		data->outfile_fd = open(data->argv[data->argc - 1],
+				O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	else
+		data->outfile_fd = open(data->argv[data->argc - 1],
+				O_WRONLY | O_CREAT | O_APPEND, 0666);
+	if (data->outfile_fd == -1)
+		print_err(data->argv[data->argc - 1], strerror(errno), EXIT_FAILURE);
+}
+
+static void	create_heredoc(t_data *data)
 {
 	int		fd;
 	int		stdin_dup;
 	int		is_open;
 	char	*line;
 
-	fd = open(".temp_heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd = open(".temp_heredoc", O_WRONLY | O_CREAT | O_TRUNC, FILE_PERMISSION);
 	if (fd == -1)
-		print_err("here_doc", strerror(errno), 1);
+		print_err("here_doc", strerror(errno), EXIT_FAILURE);
 	stdin_dup = dup(STDIN_FILENO);
-	line = "";
 	is_open = 1;
 	while (true)
 	{
@@ -29,31 +72,4 @@ void	create_heredoc(t_data *data)
 		ft_free((void **)&line);
 	}
 	close(fd);
-}
-
-void	setup_file_input(t_data *data)
-{
-	if (!data->here_doc)
-	{
-		data->fd_in = open(data->argv[1], O_RDONLY, 0644);
-		if (data->fd_in == -1)
-			print_err(data->argv[1], strerror(errno), 1);
-	}
-	else
-	{
-		create_heredoc(data);
-		data->fd_in = open(".temp_heredoc", O_RDONLY, 0644);
-		if (data->fd_in == -1)
-			print_err("here_doc", strerror(errno), 1);
-	}
-}
-
-void	setup_file_output(t_data *data)
-{
-	if (!data->here_doc)
-		data->fd_out = open(data->argv[data->argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else
-		data->fd_out = open(data->argv[data->argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (data->fd_out == -1)
-		print_err(data->argv[data->argc - 1], strerror(errno), 1);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: llai <llai@student.42london.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/30 13:47:30 by llai              #+#    #+#             */
+/*   Updated: 2024/01/30 15:34:52 by llai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_H
 # define PIPEX_H
 
@@ -8,40 +20,44 @@
 # include <sys/errno.h>
 # include <stdbool.h>
 
+# define FILE_PERMISSION 0666
+
 typedef struct s_data
 {
 	int		argc;
 	char	**argv;
 	char	**env;
-	int		fd_in;
-	int		fd_out;
+	int		infile_fd;
+	int		outfile_fd;
 	int		*pipes;
 	int		*pids;
-	int		child;
+	int		child_idx;
 	int		here_doc;
 	int		cmd_count;
 	char	**cmd_args;
 	char	*cmd;
+	int		exit_code;
 }	t_data;
 
 // init.c
 void	init_data(int argc, char **argv, char **env, t_data *data);
 
 // pipex.c
-int		pipex(t_data *data);
+void	pipex(t_data *data);
 
 // cmd.c
 // char	*get_cmd(t_data *data, int child_no);
 char	*get_cmd(char *cmd, t_data *data);
-// utils.c
+
+// error.c
 int		print_err(char *msg1, char *msg2, int errstate);
 void	err_exit(int errstate, t_data *data);
 
 // file_utils.c
-void	setup_file_input(t_data *data);
-void	setup_file_output(t_data *data);
+void	set_infile_fd(t_data *data);
+void	set_outfile_fd(t_data *data);
 
 // close.c
 void	close_fds(t_data *data);
-void	ft_free_strarr(char **arr);
+
 #endif // !PIPEX_H
